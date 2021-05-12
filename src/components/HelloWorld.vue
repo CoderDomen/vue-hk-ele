@@ -34,10 +34,10 @@
             </el-form-item>
             <el-form-item label="充值设置">
               <p>（请设置用户充值的金额，最多可设置6项。如果是脉冲版售币机，建议单次出币不超过500币，以防出错！）</p>
-              <div class="settingItem">
+              <div class="settingItem" v-for="(item,index) in form.type" :key="item.id">
                 <el-input></el-input>元
                 <el-input></el-input>币
-                <el-button>+</el-button>
+                <el-button @click="add(index)">+</el-button>
                 <el-button>-</el-button>
               </div>
             </el-form-item>
@@ -57,13 +57,24 @@ export default {
         title: "",
         desc: "",
         phone: "",
-        type: []
+        type: [
+          {
+            id: 0,
+            name: "111"
+          }
+        ]
       }
     };
   },
   methods: {
     goBack() {
       alert("返回");
+    },
+    add(index) {
+      this.form.type.push({
+        id: ++index,
+        name: "suibian"
+      });
     }
   }
 };
@@ -80,7 +91,7 @@ export default {
   .content {
     background-color: #fff;
     margin: 20px;
-    padding:  0 0 100px 0;
+    padding: 0 0 100px 0;
     .content_top {
       padding: 20px;
       border-bottom: solid 1px #ccc;
@@ -100,7 +111,7 @@ export default {
     }
   }
 }
-.settingItem{
+.settingItem {
   display: flex;
 }
 </style>
